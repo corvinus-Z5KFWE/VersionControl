@@ -10,12 +10,16 @@ using System.Windows.Forms;
 using UserMaintenance.Entities;
 using System.Resources;
 using System.IO;
+using Excel = Microsoft.Office.Interop.Excel;
+using System.Reflection;
 
 namespace UserMaintenance
 {
     public partial class Form1 : Form
     {
         BindingList<User> users = new BindingList<User>();
+        RealEstateEntities context = new RealEstateEntities();
+        List<Flat> Flats;
         public Form1()
         {
             InitializeComponent();
@@ -29,7 +33,7 @@ namespace UserMaintenance
             listBox1.ValueMember = "ID";
             listBox1.DisplayMember = "FullName";
 
-           
+            LoadData();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -39,6 +43,11 @@ namespace UserMaintenance
                 FullName = textBox1.Text
             };
             users.Add(u);
+        }
+
+        private void LoadData()
+        {
+            Flats = context.Flat.ToList();
         }
 
         private void button2_Click(object sender, EventArgs e)
