@@ -27,7 +27,7 @@ namespace UserMaintenance
         public Form1()
         {
             InitializeComponent();
-            label1.Text = Resource1.FullName; 
+            label1.Text = Resource1.FullName;
             button1.Text = Resource1.Add;
             button2.Text = Resource1.Write;
             button3.Text = Resource1.Delete;
@@ -123,7 +123,24 @@ namespace UserMaintenance
 
         private void CreateTable()
         {
+            
+            string[] headers = new string[] {
+                "Kód",
+                 "Eladó",
+                 "Oldal",
+                 "Kerület",
+                 "Lift",
+                 "Szobák száma",
+                 "Alapterület (m2)",
+                 "Ár (mFt)",
+                 "Négyzetméter ár (Ft/m2)"};
 
+            xlSheet.Cells[1, 1] = headers[0];
+
+            for (int i = 0; i < headers.Length; i++)
+            {
+                
+            }
         }
     }
 }
