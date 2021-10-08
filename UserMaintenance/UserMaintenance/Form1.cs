@@ -39,7 +39,7 @@ namespace UserMaintenance
 
             LoadData();
         }
-
+        int _million = 1000000;
         private void button1_Click(object sender, EventArgs e)
         {
             var u = new User()
@@ -146,6 +146,7 @@ namespace UserMaintenance
             object[,] values = new object[Flats.Count, headers.Length];
 
             int counter = 0;
+            int floorCollumn = 6;
             foreach (Flat f in Flats)
             {
                 values[counter, 0] = f.Code;
@@ -157,7 +158,7 @@ namespace UserMaintenance
                 values[counter, 5] = f.NumberOfRooms;
                 values[counter, 6] = f.FloorArea;
                 values[counter, 7] = f.Price / f.FloorArea;
-                values[counter, 8] = "=" + GetCell(counter + 2,8) + "+ 1000000/" + GetCell(counter + 2, 7);
+                values[counter, 8] = string.Format("={0}/{1}*{2}", "H" + (counter + 2 ).ToString(), GetCell(counter + 2, floorCollumn + 1), _million.ToString());
                 counter++;
             }
 
