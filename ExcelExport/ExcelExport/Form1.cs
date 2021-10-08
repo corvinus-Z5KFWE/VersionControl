@@ -129,6 +129,9 @@ namespace ExcelExport
         }
         public void FormatTable()
         {
+            int lastRowID = xlSheet.UsedRange.Rows.Count;
+            int lastCollumn = xlSheet.UsedRange.Columns.Count;
+
             Excel.Range headerRange = xlSheet.get_Range(GetCell(1, 1), GetCell(1, headers.Length));
             headerRange.Font.Bold = true;
             headerRange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
@@ -138,7 +141,9 @@ namespace ExcelExport
             headerRange.Interior.Color = Color.LightBlue;
             headerRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
 
-            int lastRowID = xlSheet.UsedRange.Rows.Count;
+            Excel.Range fullRange = xlSheet.get_Range(GetCell(1, 1), GetCell( lastRowID, headers.Length ));
+            fullRange.BorderAround2(Excel.XlLineStyle.xlContinuous, Excel.XlBorderWeight.xlThick);
+
 
         }
     }
