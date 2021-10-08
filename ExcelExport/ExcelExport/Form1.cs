@@ -84,6 +84,8 @@ namespace ExcelExport
             object[,] values = new object[Flats.Count, headers.Length];
 
             int counter = 0;
+            int floorColumn = 6;
+            int _million = 1000000;
 
             foreach (Flat f in Flats)
             {
@@ -99,7 +101,7 @@ namespace ExcelExport
                 values[counter, 5] = f.NumberOfRooms;
                 values[counter, 6] = f.FloorArea;
                 values[counter, 7] = f.Price;
-                values[counter, 8] = "=H2/G2*1000000";
+                values[counter, 8] = string.Format("={0}/{1}*{2}","H" + (counter + 2).ToString(), GetCell(counter + 2, floorColumn + 1), _million.ToString() );
                 counter++;
             }
 
