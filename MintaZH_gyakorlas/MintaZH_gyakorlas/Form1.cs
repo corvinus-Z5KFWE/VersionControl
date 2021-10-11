@@ -45,5 +45,13 @@ namespace MintaZH_gyakorlas
            }
 
         }
+
+        private void CreateYearFilter()
+        {
+            var years = (from x in results
+                         orderby x.Year
+                         select x.Year).Distinct();
+            comboBox1.DataSource = years.ToList();
+        }
     }
 }
