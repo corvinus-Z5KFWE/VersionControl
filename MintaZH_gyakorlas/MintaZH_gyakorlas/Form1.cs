@@ -18,6 +18,7 @@ namespace MintaZH_gyakorlas
         {
             InitializeComponent();
             LoadData("Summer_olympic_Medals.csv");
+            CalculateOrder();
         }
 
         private void LoadData(string practiceFile)
@@ -52,6 +53,30 @@ namespace MintaZH_gyakorlas
                          orderby x.Year
                          select x.Year).Distinct();
             comboBox1.DataSource = years.ToList();
+        }
+
+        private int CalculateResult(OlympicResult or)
+        {
+            int betterCountriesCount = 0;
+            var betterCountries = (from y in results
+                                   where y.Year == or.Year && y.Country != or.Country
+                                   select y);
+            foreach (var r in betterCountries)
+            {
+                if (r.Medals[0] > or.Medals[0])
+                    betterCountriesCount++;
+                else if (r.Medals[0] == or.Medals[0] && r.Medals[1] > or.Medals[1])
+                    betterCountriesCount++;
+                else if (r.Medals[0] == or.Medals[0] && r.Medals[1] == or.Medals[1] && r.Medals[2] > or.Medals[2])
+                    betterCountriesCount++;
+            }
+            return betterCountriesCount + 1;
+        }
+
+        private void CalculateOrder()
+        {
+            foreach (var r in results)
+                r.Position = CalculateResult(r);
         }
     }
 }
