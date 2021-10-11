@@ -8,12 +8,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace MintaZH_gyakorlas
 {
     public partial class Form1 : Form
     {
         List<OlympicResult> results = new List<OlympicResult>();
+        Excel.Application xlApp;
+        Excel.Workbook xlWB;
+        Excel.Worksheet xlSheet;
         public Form1()
         {
             InitializeComponent();
@@ -77,6 +82,60 @@ namespace MintaZH_gyakorlas
         {
             foreach (var r in results)
                 r.Position = CalculateResult(r);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                xlApp = new Excel.Application();
+                xlWB = xlApp.Workbooks.Add(Missing.Value);
+                xlSheet = xlWB.ActiveSheet;
+
+                CreateExcel();
+
+                xlApp.Visible = true;
+                xlApp.UserControl = true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+
+                xlWB.Close(false, Type.Missing, Type.Missing);
+                xlApp.Quit();
+                xlWB = null;
+                xlApp = null;
+            }
+        }
+
+        private void CreateExcel()
+        {
+            var headers = new string[]
+            {
+                "Helyezés",
+                "Ország",
+                "Arany",
+                "Ezüst",
+                "Bronz"
+            };
+            for (int i = 0; i < headers.Length; i++)
+                xlSheet.Cells[1, i + 1] = headers[i];
+
+            var filteredresults = from r in results
+                           where r.Year == (int)comboBox1.SelectedIndex
+                           orderby r.Position
+                           select r;
+
+            var szamlalo = 2;
+            foreach (var i in filteredresults)
+            {
+                xlSheet.Cells[szamlalo, 1] = i.Position;
+                xlSheet.Cells[szamlalo, 2] = i.Country;
+                for (int x = 0; x < 2; x++)
+                    xlSheet.Cells[szamlalo, x + 3] = i.Medals[x];
+                szamlalo++;
+            }
+
         }
     }
 }
