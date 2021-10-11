@@ -23,6 +23,7 @@ namespace MintaZH_gyakorlas
         {
             InitializeComponent();
             LoadData("Summer_olympic_Medals.csv");
+            CreateYearFilter();
             CalculateOrder();
         }
 
