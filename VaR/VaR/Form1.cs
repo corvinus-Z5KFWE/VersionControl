@@ -11,10 +11,16 @@ using System.Windows.Forms;
 namespace VaR
 {
     public partial class Form1 : Form
+    
     {
+        PortfolioEntities context = new PortfolioEntities();
+        List<Tick> Ticks;
         public Form1()
         {
             InitializeComponent();
+            Ticks = context.Tick.ToList();
+            dataGridView1.DataSource = Ticks;
         }
+        
     }
 }
