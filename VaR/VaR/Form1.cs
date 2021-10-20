@@ -21,6 +21,7 @@ namespace VaR
             InitializeComponent();
             Ticks = context.Tick.ToList();
             dataGridView1.DataSource = Ticks;
+            CreatePortfolio();
 
             List<decimal> Nyereségek = new List<decimal>();
             int intervalum = 30;
