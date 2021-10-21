@@ -12,9 +12,13 @@ namespace VAR_2
 {
     public partial class Form1 : Form
     {
+        PortfolioEntities context = new PortfolioEntities();
+        List<Tick> Ticks;
         public Form1()
         {
             InitializeComponent();
+            InitializeComponent();
+            Ticks = context.Tick.ToList();
         }
     }
 }
