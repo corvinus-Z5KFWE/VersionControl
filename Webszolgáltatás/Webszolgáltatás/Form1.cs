@@ -7,12 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Webszolgáltatás.Entities;
 using Webszolgáltatás.MnbServicereference;
 
 namespace Webszolgáltatás
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
@@ -31,7 +33,10 @@ namespace Webszolgáltatás
             var result = response.GetExchangeRatesResult;
 
             richTextBox1.Text = result;
+            dataGridView1.DataSource = Rates;
         }
+
+        BindingList<RateData> Rates = new BindingList<RateData>();
 
 
     }
