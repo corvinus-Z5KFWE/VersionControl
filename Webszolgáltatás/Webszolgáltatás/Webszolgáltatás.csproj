@@ -35,6 +35,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,6 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\MnbServicereference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -63,6 +70,50 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Connected Services\MnbServicereference\arfolyamok.wsdl" />
+    <None Include="Connected Services\MnbServicereference\arfolyamok.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MnbServicereference\arfolyamok1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Connected Services\MnbServicereference\MNBArfolyamServiceSoapImpl.wsdl" />
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetCurrenciesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetCurrenciesResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetCurrencyUnitsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetCurrencyUnitsResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetCurrentExchangeRatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetCurrentExchangeRatesResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetDateIntervalResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetDateIntervalResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetExchangeRatesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetExchangeRatesResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetInfoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\MnbServicereference\Webszolgáltatás.MnbServicereference.GetInfoResponseBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -75,6 +126,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\MnbServicereference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MnbServicereference\arfolyamok.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MnbServicereference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MnbServicereference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\MnbServicereference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
