@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 using Webszolgáltatás.Entities;
 using Webszolgáltatás.MnbServicereference;
@@ -58,6 +59,20 @@ namespace Webszolgáltatás
                 }
             }
 
+            chartRateDat.DataSource = Rates;
+            var series = chartRateDat.Series[0];
+            series.ChartType = SeriesChartType.Line;
+            series.XValueMember = "Date";
+            series.YValueMembers = "Value";
+            series.BorderWidth = 2;
+
+            var legend = chartRateDat.Legends[0];
+            legend.Enabled = false;
+
+            var chartArea = chartRateDat.ChartAreas[0];
+            chartArea.AxisX.MajorGrid.Enabled = false;
+            chartArea.AxisY.MajorGrid.Enabled = false;
+            chartArea.AxisY.IsStartedFromZero = false;
         }
 
         BindingList<RateData> Rates = new BindingList<RateData>();

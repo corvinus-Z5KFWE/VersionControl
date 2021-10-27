@@ -29,9 +29,14 @@ namespace Webszolgáltatás
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.chartRateDat = new System.Windows.Forms.DataVisualization.Charting.Chart();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartRateDat)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -52,16 +57,34 @@ namespace Webszolgáltatás
             this.dataGridView1.Size = new System.Drawing.Size(253, 344);
             this.dataGridView1.TabIndex = 1;
             // 
+            // chartRateDat
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartRateDat.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartRateDat.Legends.Add(legend1);
+            this.chartRateDat.Location = new System.Drawing.Point(524, 13);
+            this.chartRateDat.Name = "chartRateDat";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartRateDat.Series.Add(series1);
+            this.chartRateDat.Size = new System.Drawing.Size(654, 344);
+            this.chartRateDat.TabIndex = 2;
+            this.chartRateDat.Text = "chart1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1343, 450);
+            this.Controls.Add(this.chartRateDat);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartRateDat)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -70,6 +93,7 @@ namespace Webszolgáltatás
 
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartRateDat;
     }
 }
 
