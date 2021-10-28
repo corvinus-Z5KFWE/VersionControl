@@ -16,29 +16,33 @@ namespace Webszolgáltatás
 {
     public partial class Form1 : Form
     {
-        
+        BindingList<RateData> Rates = new BindingList<RateData>();
+        string result = null;
         public Form1()
         {
             InitializeComponent();
+            RefreshData();
+        }      
 
+        public  void Web()
+        {
             var mnbService = new MNBArfolyamServiceSoapClient();
 
             var request = new GetExchangeRatesRequestBody()
             {
                 currencyNames = "EUR",
-                startDate = "2020-01-01",
-                endDate = "2020-06-30"
+                startDate = (dateTimePicker1.Value).ToString(),
+                endDate = dateTimePicker2.Value.ToString()
             };
 
             var response = mnbService.GetExchangeRates(request);
 
-            var result = response.GetExchangeRatesResult;
-
-            richTextBox1.Text = result;
-            dataGridView1.DataSource = Rates;
-
+            result = response.GetExchangeRatesResult;
+        }
+        public void XML()
+        {
             var xml = new XmlDocument();
-            xml.Load(result);
+            xml.LoadXml(result);
 
             foreach (XmlElement element in xml.DocumentElement)
             {
@@ -58,7 +62,10 @@ namespace Webszolgáltatás
                     rate.Value = value / unit;
                 }
             }
+        }
 
+        public void Diagram()
+        {
             chartRateDat.DataSource = Rates;
             var series = chartRateDat.Series[0];
             series.ChartType = SeriesChartType.Line;
@@ -74,10 +81,29 @@ namespace Webszolgáltatás
             chartArea.AxisY.MajorGrid.Enabled = false;
             chartArea.AxisY.IsStartedFromZero = false;
         }
+        public void RefreshData()
+        {
+            Rates.Clear();
+            Web();
+            XML();
+            Diagram();
+            richTextBox1.Text = result;
+            dataGridView1.DataSource = Rates;    
+        }
 
-        BindingList<RateData> Rates = new BindingList<RateData>();
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
 
-        
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshData();
+        }
     }
 }
