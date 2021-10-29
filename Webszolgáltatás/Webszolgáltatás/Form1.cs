@@ -17,12 +17,32 @@ namespace Webszolgáltatás
     public partial class Form1 : Form
     {
         BindingList<RateData> Rates = new BindingList<RateData>();
+        BindingList<string> Currencies = new BindingList<string>();
         string result = null;
         public Form1()
         {
             InitializeComponent();
+            GetCurrencies();
             RefreshData();
-        }      
+        } 
+        
+        public void GetCurrencies()
+        {
+            comboBox1.DataSource = Currencies;
+            var mnbService = new MNBArfolyamServiceSoapClient();
+            var request = new GetCurrenciesRequestBody();
+
+            var response = mnbService.GetCurrencies(request);
+            var result = response.GetCurrenciesResult;
+
+            XmlDocument xml = new XmlDocument();
+            xml.LoadXml(result);
+            foreach(XmlElement item in xml.DocumentElement.ChildNodes[0])
+            {
+                string newItem = item.InnerText;
+                Currencies.Add(newItem);
+            }
+        }
 
         public  void Web()
         {
@@ -30,7 +50,7 @@ namespace Webszolgáltatás
 
             var request = new GetExchangeRatesRequestBody()
             {
-                currencyNames = "EUR",
+                currencyNames = comboBox1.SelectedItem.ToString(),
                 startDate = (dateTimePicker1.Value).ToString(),
                 endDate = dateTimePicker2.Value.ToString()
             };
@@ -52,6 +72,8 @@ namespace Webszolgáltatás
                 rate.Date = DateTime.Parse(element.GetAttribute("date"));
 
                 var childElement = (XmlElement)element.ChildNodes[0];
+                if (childElement == null)
+                    continue;
                 rate.Currency = childElement.GetAttribute("curr");
 
                 //érték
