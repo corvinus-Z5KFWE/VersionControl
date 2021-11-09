@@ -1,4 +1,5 @@
-﻿using Fejlesztési_minták.Entities;
+﻿using Fejlesztési_minták.Abstractions;
+using Fejlesztési_minták.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,44 +14,44 @@ namespace Fejlesztési_minták
 {
     public partial class form1 : Form
     {
-        private List<Ball> _balls = new List<Ball>();
-        private BallFactory _factory;
-        private BallFactory Factory
+        public List<Toy> _toys = new List<Toy>();
+        private IToyFactory _factory;
+
+        private IToyFactory Factory
         {
             get { return _factory; }
-            set { _factory = value; }
+            set { _factory = value;
+            }
         }
         public form1()
         {
             InitializeComponent();
-            Factory = new BallFactory();
+            Factory = new CarFactory();
         }
 
-        private void createTimer_Tick(object sender, EventArgs e)
+        public void createTimer_Tick(object sender, EventArgs e)
         {
-            var ball = Factory.CreateNew();
-            _balls.Add(ball);
-            ball.Left = -ball.Width;
-            mainPanel.Controls.Add(ball);
+            var toy = Factory.CreateNew();
+            _toys.Add(toy);
+            toy.Left = -toy.Width;
+            mainPanel.Controls.Add(toy);
         }
 
-        private void conveyorTimer_Tick(object sender, EventArgs e)
+        public void conveyorTimer_Tick(object sender, EventArgs e)
         {
             var maxPosiion = 0;
-            foreach (var ball in _balls)
+            foreach (var toy in _toys)
             {
-                ball.MoveBall();
-                if (ball.Left > maxPosiion)
-                {
-                    maxPosiion = ball.Left;
-                }
+                toy.MoveToy();
+                if (toy.Left > maxPosiion)
+                    maxPosiion = toy.Left;
             }
 
             if (maxPosiion >1000)
             {
-                var oldestBall = _balls[0];
-                mainPanel.Controls.Remove(oldestBall);
-                _balls.Remove(oldestBall);
+                var oldestToy = _toys[0];
+                mainPanel.Controls.Remove(oldestToy);
+                _toys.Remove(oldestToy);
             }
         }
 
