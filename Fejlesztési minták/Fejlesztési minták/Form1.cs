@@ -93,5 +93,14 @@ namespace Fejlesztési_minták
             }
             button.BackColor = colorPicker.Color;
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Factory = new PresentFactory
+            {
+                PresentColor = button5.BackColor,
+                SzalagColor = button6.BackColor
+            };
+        }
     }
 }
