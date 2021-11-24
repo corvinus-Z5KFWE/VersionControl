@@ -102,5 +102,10 @@ namespace Fejlesztési_minták
                 SzalagColor = button6.BackColor
             };
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using VaR_gyakorlas_2.Entities;
+using System.IO;
 
-namespace VAR_2
+
+namespace VaR_gyakorlas_2
 {
     public partial class Form1 : Form
     {
         PortfolioEntities context = new PortfolioEntities();
         List<Tick> Ticks;
-        List<PortfolioItem> portfolio = new List<PortfolioItem>();
+        List<PortfolioItem> Portfolio = new List<PortfolioItem>();
         List<decimal> Nyereségek = new List<decimal>();
         public Form1()
         {
-            InitializeComponent();
             InitializeComponent();
             Ticks = context.Tick.ToList();
             dataGridView1.DataSource = Ticks;
@@ -39,24 +40,24 @@ namespace VAR_2
 
             var nyereségekRendezve = (from x in Nyereségek
                                       orderby x
-                                      select x)
-                                        .ToList();
+                                      select x).ToList();
+
             MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString());
         }
 
         private void CreatePortfolio()
         {
-            portfolio.Add(new PortfolioItem() { Index = "OTP", Volume = 10 });
-            portfolio.Add(new PortfolioItem() { Index = "ZWACK", Volume = 10 });
-            portfolio.Add(new PortfolioItem() { Index = "ELMU", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "OTP", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ZWACK", Volume = 10 });
+            Portfolio.Add(new PortfolioItem() { Index = "ELMU", Volume = 10 });
 
-            dataGridView2.DataSource = portfolio;
+            dataGridView2.DataSource = Portfolio;
         }
 
         private decimal GetPortfolioValue(DateTime date)
         {
             decimal value = 0;
-            foreach (var item in portfolio)
+            foreach (var item in Portfolio)
             {
                 var last = (from x in Ticks
                             where item.Index == x.Index.Trim()
@@ -68,16 +69,16 @@ namespace VAR_2
             return value;
         }
 
-        private void SaveToFile()
+        private void Mentes()
         {
             SaveFileDialog sf = new SaveFileDialog();
             sf.Filter = "Text files (*.txt) | *.txt | All files (*.*) | *.*";
-            if (sf.ShowDialog()== DialogResult.OK)
+            if (sf.ShowDialog() == DialogResult.OK)
             {
                 using (StreamWriter sw = new StreamWriter(sf.FileName))
                 {
                     sw.WriteLine("Időszak\tNyereség");
-                    for (int i = 0; i < Nyereségek.Count; i++)
+                    for (int i = 0; i < Nyereségek.Count(); i++)
                     {
                         sw.WriteLine((i + 1).ToString() + "\t" + Nyereségek[i]);
                     }
@@ -87,14 +88,7 @@ namespace VAR_2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            SaveToFile();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // TODO: This line of code loads data into the 'portfolioDataSet.Tick' table. You can move, or remove it, as needed.
-            this.tickTableAdapter.Fill(this.portfolioDataSet.Tick);
-
+            Mentes();
         }
     }
 }
