@@ -38,21 +38,17 @@ namespace UnitTestExample.Test
          TestCase("pwd", false),
          TestCase("Password1", true)
          ]
-        public bool TestValidatePassword(string password)
+        public void  TestValidatePassword(string password, bool expectedResult)
         {
             //Arrange
             var accountController = new AccountController();
 
             //Act
+            var actualResort = accountController.ValidatePassword(password);
 
-            
-           
-            var hasLowerChar = new Regex(@"[a-z]+");
-            var hasUpperChar = new Regex(@"[A-Z]+");
-            var hasNumber = new Regex(@"[0-9]+");
-            var isEightChar = new Regex(@".{8}");
-
-            return hasLowerChar.IsMatch(password) && hasUpperChar.IsMatch(password) && hasNumber.IsMatch(password) && isEightChar.IsMatch(password);
+            //Assert
+            Assert.AreEqual(expectedResult, actualResort);
+          
             
         }
 
