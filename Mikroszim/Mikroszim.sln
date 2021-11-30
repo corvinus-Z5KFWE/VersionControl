@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mikroszim", "Mikroszim\Mikroszim.csproj", "{02758530-69CD-45B3-8CBF-FC6CD910AF34}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02758530-69CD-45B3-8CBF-FC6CD910AF34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02758530-69CD-45B3-8CBF-FC6CD910AF34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02758530-69CD-45B3-8CBF-FC6CD910AF34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02758530-69CD-45B3-8CBF-FC6CD910AF34}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A83675B3-FF43-4F1C-B065-2D91EF02BC64}
+	EndGlobalSection
+EndGlobal
