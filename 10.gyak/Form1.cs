@@ -16,13 +16,20 @@ namespace _10.gyak
     {
         GameController gc = new GameController();
         GameArea ga;
+        int populationSize = 100;
+        int nbrOfSteps = 10;
+        int nbrOfStepsIncrement = 10;
+        int generation = 1;
         public Form1()
         {
             InitializeComponent();
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
-
-            gc.AddPlayer();
+            for (int i = 0; i < populationSize; i++)
+            {
+                gc.AddPlayer(nbrOfSteps);
+            }
+            
             gc.Start(true);
 
         }
