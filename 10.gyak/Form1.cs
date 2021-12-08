@@ -27,13 +27,16 @@ namespace _10.gyak
             label1.BringToFront();
             ga = gc.ActivateDisplay();
             this.Controls.Add(ga);
+
+            gc.GameOver += Gc_GameOver;
+
             for (int i = 0; i < populationSize; i++)
             {
                 gc.AddPlayer(nbrOfSteps);
             }
             
-            gc.Start(true);
-
+            gc.Start();
+            
         }
 
         private void Gc_GameOver(object sender)
@@ -43,22 +46,10 @@ namespace _10.gyak
                 "{0}. generáció",
                 generation);
 
-            gc.GameOver += Gc_GameOver;
-
             var playerList = from p in gc.GetCurrentPlayers()
                              orderby p.GetFitness() descending
                              select p;
             var topPerformers = playerList.Take(populationSize / 2).ToList();
-
-            var winners = from p in topPerformers
-                          where p.IsWinner
-                          select p;
-            if (winners.Count() > 0)
-            {
-                winnerBrain = winners.FirstOrDefault().Brain.Clone();
-                gc.GameOver -= Gc_GameOver;
-                return;
-            }
 
             gc.ResetCurrentLevel();
             foreach (var p in topPerformers)
@@ -75,6 +66,33 @@ namespace _10.gyak
                     gc.AddPlayer(b.Mutate());
             }
             gc.Start();
+
+            button1.Enabled = false;
+            button1.Visible = false;
+
+            var winners = from p in topPerformers
+                          where p.IsWinner
+                          select p;
+            if (winners.Count() > 0)
+            {
+                winnerBrain = winners.FirstOrDefault().Brain.Clone();
+                gc.GameOver -= Gc_GameOver;
+                button1.Enabled = true;
+                button1.Visible = true;
+                return;
+            }
+
+            
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            gc.ResetCurrentLevel();
+            gc.AddPlayer(winnerBrain.Clone());
+            gc.AddPlayer();
+            ga.Focus();
+            gc.Start(true);
         }
     }
 }
